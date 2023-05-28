@@ -1,0 +1,34 @@
+{
+  "name": "zdenda-ui",
+  "version": "1.0.0",
+  "description": "Pletronova UIIIIIII",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krisp1k/Karel-Morhen.git"
+  },
+  "author": "Krisp1k (PomaluSnejksi)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krisp1k/Karel-Morhen/issues"
+  },
+  "homepage": "https://github.com/Krisp1k/Karel-Morhen#readme",
+  "dependencies": {
+    "@discordjs/rest": "^1.1.0",
+    "chalk": "^4.1.2",
+    "cors": "^2.8.5",
+    "discord-api-types": "^0.37.4",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.1",
+    "fs": "^0.0.1-security",
+    "get-urls": "^11.0.0",
+    "node-fetch": "^3.2.10",
+    "puppeteer": "^16.2.0",
+    "xml-formatter": "^2.6.1",
+    "xml2js": "^0.4.23",
+    "xmlbuilder": "^15.1.1"
+  }
+}
