@@ -1,4 +1,4 @@
-const { InteractionType } = require('discord.js')
+const { InteractionType, EmbedBuilder } = require('discord.js')
 
 module.exports = {
     name: 'interactionCreate',
@@ -26,10 +26,6 @@ module.exports = {
                     embeds: [embed],
                     ephemeral:true
                 })
-                // await interaction.reply({
-                //     content: 'Něco se posralo\nhttps://cdn.discordapp.com/emojis/1036414607033638983.webp?size=96&quality=lossless',
-                //     ephemeral: true
-                // })
             }
         } 
     }

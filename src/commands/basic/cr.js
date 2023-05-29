@@ -19,20 +19,8 @@ module.exports = {
         const serverId = interaction.options.getNumber("server");
 
         if (serverId != 3 && serverId != 4 && serverId != 5 && serverId != 6 && serverId != 7) {
-            // const embed = new EmbedBuilder()
-            //     .setTitle(`Pozice černých rytířů na serveru ${serverId}`)
-            //     .setColor(0x18e1ee)
-            //     .setTimestamp(Date.now())
-            //     .setDescription("Pro tento server nebyli nalezeni žádní rytíři.")
-
-            // await interaction.reply({
-            //     embeds: [embed],
-            // })
-
             finalString = `Pro server ${serverId} nebyli nalezeni žádní ČR.`
-            await interaction.reply(finalString)
-
-            return;
+            return await interaction.reply(finalString)
         }
 
         const url = 'https://www.panhradu.cz/units_serialize.aspx?id_server=' + serverId
@@ -67,12 +55,6 @@ module.exports = {
             }
 
             if (contentPiece[2] === "10") {
-                // const crInfo = {
-                //     x_cord: contentPiece[0],
-                //     y_cord: contentPiece[1],
-                //     art: crArtefakt,
-                // }
-                //crArr.push(crInfo)
                 
                 const tempString = `${crArtefakt} - [[${contentPiece[0]},${contentPiece[1]}]](https://panhradu.cz/main.aspx?x=${contentPiece[0]}&y=${contentPiece[1]})\n`
                 const finalStringLen = finalString.length
@@ -88,39 +70,6 @@ module.exports = {
         }
 
         newContent.split("\n").forEach(contentLine => makeArray(contentLine))
-
-        // const embed = new EmbedBuilder()
-        //     .setTitle(`Pozice černých rytířů na serveru ${serverId}`)
-        //     .setColor(0x18e1ee)
-        //     .setTimestamp(Date.now())
-
-        // for (let i = 0; i < crArr.length; i++) {
-
-        //     const cr = crArr[i];
-
-        //     if (embed.fields && embed.fields.length >= 25) {
-        //         await interaction.reply({
-        //             embeds: [embed],
-        //         })
-
-        //         const newEmbed = new EmbedBuilder()
-        //             .setTitle(`Pozice černých rytířů na serveru ${serverId}`)
-        //             .setColor(0x18e1ee)
-        //             .setTimestamp(Date.now())
-
-        //         for (let j = i; j < crArr.length; j++) {
-        //             newEmbed.addFields({ name: cr.art, value: `*[Odkaz na mapu](https://panhradu.cz/main.aspx?x=${cr.x_cord}&y=${cr.y_cord})*`, inline: true })
-        //         }
-
-        //         await interaction.followUp({
-        //             embeds: [newEmbed],
-        //         })
-
-        //         break;
-        //     }
-
-        //     embed.addFields({ name: cr.art, value: `*[Odkaz na mapu](https://panhradu.cz/main.aspx?x=${cr.x_cord}&y=${cr.y_cord})*`, inline: true })
-        // }
 
         try {
             chunks.push(finalString);
