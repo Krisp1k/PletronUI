@@ -9,7 +9,7 @@ module.exports = {
 
         // fetch klanů
         client.fetchClans()
-        setInterval(client.fetchClans, 60 * 1000)
+        setInterval(client.fetchClans, 60 * 1000 * 30)
 
 
         console.log('jedu jak drak a jsem ' + client.user.tag)
