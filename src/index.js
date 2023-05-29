@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-const { token } = process.env
 const { Client, Collection, GatewayIntentBits } = require('discord.js')
 const fs = require('fs')
 
@@ -68,4 +67,4 @@ function readFirstRow(filePath) {
 
 client.handleEvents()
 client.handleCommands()
-client.login(token)
+client.login(process.env.TOKEN)
