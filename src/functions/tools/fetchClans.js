@@ -49,9 +49,44 @@ module.exports = (client) => {
 
         const file = fs.createWriteStream('src/data/klany.txt');
         file.on('error', function(err) { console.error(err); return; });
-        serveryKlany.forEach(function(v) { file.write(v.join(', ').toLowerCase() + '\n'); });
+        serveryKlany.forEach(function(v) { 
+            file.write(v.join(', ').toLowerCase() + '\n'); 
+        });
         file.end();
+
+        // const dbConn = mysql.createConnection({
+        //     host: db_host,
+        //     user: db_admin_login,
+        //     password: db_admin_pass,
+        //     database: db_name,
+        //     connectTimeout: 30000,
+        //     connectionLimit: 150,
+        //     queueLimit: 300,
+        //     acquireTimeout: 1000000
+        // });
+
+        // console.log(db_host, db_admin_login, db_admin_pass, db_name)
+        // console.log(dbConn)
+
+        // dbConn.connect((err) => {
+        //     if (err) {
+        //         console.log(err);
+        //         return
+        //     }
+        // })
         
-        console.log("klany obnoveny")
+        // serveryKlany.forEach(function(klan) { 
+        //     $query = `INSERT INTO 'klany' (nazev_klanu) VALUES ('${klan})` 
+
+        //     dbConn.query($query, (err, rows, fields) => {
+        //         if (err) { console.log(err); return;}
+                
+        //         console.log("Klany obnoveny", rows, fields)
+        //     })
+        // });
+
+        // dbConn.end()
+
+
     }
 }

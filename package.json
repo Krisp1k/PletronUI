@@ -25,10 +25,7 @@
     "dotenv": "^16.0.1",
     "fs": "^0.0.1-security",
     "get-urls": "^11.0.0",
-    "node-fetch": "^3.2.10",
-    "puppeteer": "^16.2.0",
-    "xml-formatter": "^2.6.1",
-    "xml2js": "^0.4.23",
-    "xmlbuilder": "^15.1.1"
+    "isomorphic-fetch": "^3.0.0",
+    "puppeteer": "^16.2.0"
   }
 }

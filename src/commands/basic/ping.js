@@ -6,15 +6,9 @@ module.exports = {
         .setDescription('Ukáže ping'),
         
     async run(interaction, client) {
-
-        const embed = new EmbedBuilder()
-            .setTitle("Ping")
-            .setColor(0x18e1ee)
-            .setTimestamp(Date.now())
-            .setDescription("🤖 API : " + client.ws.ping + "ms")
-
-        await interaction.reply({
-            embeds: [embed],
-        })
+        const sentTimestamp = Date.now();
+        await interaction.reply('Pinguju...');
+        const latency = Date.now() - sentTimestamp;
+        await interaction.editReply(`**:globe_with_meridians:  API \t[${client.ws.ping}ms]\n:desktop:  Odezva \t[${latency}ms]**`)
     }
 }

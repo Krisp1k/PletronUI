@@ -45,6 +45,14 @@ module.exports = {
         const action = interaction.options._hoistedOptions[0].value;
         const userId = interaction.options._hoistedOptions[1].value;
 
+        if (userId == "1110915541469773866") {
+            await interaction.reply({
+                content: `To jsem já, to nemůžu`,
+                ephemeral: true,
+            });
+            return;
+        }
+
         switch (action) {
             case 'start':
                 writeToFile(userId);

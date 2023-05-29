@@ -5,9 +5,11 @@ module.exports = {
         .setName('lp')
         .setDescription('Odpoví ti 😏'),
     async run(interaction, client) {
-
-        const replyPromise = client.randomPletronReply().then(async (reply) => {
-            await interaction.reply({content: reply, ephemeral: false})
+        client.randomPletronReply().then(async (reply) => {
+            await interaction.reply({
+                content: reply, 
+                ephemeral: false
+            })
         })
     }
 }

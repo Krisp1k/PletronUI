@@ -55,14 +55,14 @@ module.exports = {
             // 49 plášť, 50 helma, 51 meč, 52 zbroj, 53 amulet, 54 štít, 55 kuš, 56 boty
 
             switch (crArtefakt) {
-                case 49: crArtefakt = ":shirt: Plášť temnoty"; break;
-                case 50: crArtefakt = ":military_helmet: Helma nazgůla"; break;
-                case 51: crArtefakt = ":dagger: Ohnivý meč"; break;
-                case 52: crArtefakt = ":kimono: Černá zbroj"; break;
-                case 53: crArtefakt = ":ring: Amulet života"; break;
-                case 54: crArtefakt = ":shield: Štít smrtihlav"; break;
-                case 55: crArtefakt = ":bow_and_arrow: Černá kuš"; break;
-                case 56: crArtefakt = ":jeans: Černé holenice"; break;
+                case 49: crArtefakt = "**:shirt: Plášť temnoty**"; break;
+                case 50: crArtefakt = "**:military_helmet: Helma nazgůla**"; break;
+                case 51: crArtefakt = "**:dagger: Ohnivý meč**"; break;
+                case 52: crArtefakt = "**:kimono: Černá zbroj**"; break;
+                case 53: crArtefakt = "**:ring: Amulet života**"; break;
+                case 54: crArtefakt = "**:shield: Štít smrtihlav**"; break;
+                case 55: crArtefakt = "**:bow_and_arrow: Černá kuš**"; break;
+                case 56: crArtefakt = "**:jeans: Černé holenice**"; break;
                 default: crArtefakt = ":no_entry_sign: Žádný artefakt"; break;
             }
 
@@ -74,7 +74,7 @@ module.exports = {
                 // }
                 //crArr.push(crInfo)
                 
-                const tempString = `**${crArtefakt}** - [[${contentPiece[0]},${contentPiece[1]}]](https://panhradu.cz/main.aspx?x=${contentPiece[0]}&y=${contentPiece[1]})\n`
+                const tempString = `${crArtefakt} - [[${contentPiece[0]},${contentPiece[1]}]](https://panhradu.cz/main.aspx?x=${contentPiece[0]}&y=${contentPiece[1]})\n`
                 const finalStringLen = finalString.length
                 const tempStringLen = tempString.length
 
