@@ -27,5 +27,9 @@
     "get-urls": "^11.0.0",
     "isomorphic-fetch": "^3.0.0",
     "puppeteer": "^16.2.0"
-  }
+  },
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
+ }
 }
