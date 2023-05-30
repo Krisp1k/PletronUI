@@ -2,20 +2,20 @@
   "name": "zdenda-ui",
   "version": "1.0.0",
   "description": "Pletronova UIIIIIII",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node ."
+    "dev": "node ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Krisp1k/Karel-Morhen.git"
+    "url": "git+https://github.com/Krisp1k/PletronUI.git"
   },
   "author": "Krisp1k (PomaluSnejksi)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Krisp1k/Karel-Morhen/issues"
+    "url": "https://github.com/Krisp1k/PletronUI/issues"
   },
-  "homepage": "https://github.com/Krisp1k/Karel-Morhen#readme",
+  "homepage": "https://github.com/Krisp1k/PletronUI#readme",
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
     "chalk": "^4.1.2",
@@ -27,9 +27,5 @@
     "get-urls": "^11.0.0",
     "isomorphic-fetch": "^3.0.0",
     "puppeteer": "^16.2.0"
-  },
-  "engines": {
-    "node": "16.x",
-    "npm": "7.x"
- }
+  }
 }

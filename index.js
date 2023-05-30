@@ -24,7 +24,7 @@ for (const folder of functionFolders) {
         .filter((file) => file.endsWith('.js'))
 
     for (const file of functionFiles)
-        require(`./functions/${folder}/${file}`)(client)
+        require(`./src/functions/${folder}/${file}`)(client)
 }
 
 client.on('messageCreate', (msg) => {
@@ -65,6 +65,9 @@ function readFirstRow(filePath) {
         });
     });
 }
+
+const token = process.env.TOKEN;
+console.log(token) // this logs out the correct token
 
 client.handleEvents()
 client.handleCommands()
