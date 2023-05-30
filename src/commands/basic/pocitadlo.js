@@ -6,8 +6,10 @@ module.exports = {
         .setDescription('Spočítá čas, kdy se rozpadne artefakt podle aktuálních procent')
         .addNumberOption(option =>
             option.setName('procenta')
-                .setDescription('Aktuální procenta artefaktu')
+                .setDescription('Aktuální procenta artefaktu (0-100)')
                 .setRequired(true)
+                .setMinValue(0)
+                .setMaxValue(100)
         ),
     async run(interaction, client) {
 
@@ -73,11 +75,6 @@ module.exports = {
         const currPercentage = interaction.options.getNumber("procenta")
         const casyRozpadu = vypocetCasu(currPercentage);
         const options = { hour: 'numeric', minute: 'numeric' };
-
-        // await interaction.reply({
-        //     content: '```Dosáhnutí 0%: \n- ' + casyRozpadu.breakdownTime.toLocaleString() + '\n\nKompletní rozpad: \n- ' + casyRozpadu.breakdownTime.toLocaleString() + '```',
-        //     ephemeral: true
-        // })
 
         await interaction.reply({
             content: `Artefakt dosáhne 0% v čase **${casyRozpadu.breakdownTime.toLocaleTimeString(undefined, options)}**.\n*(Kompletně se rozpadne v 5:55 hodin dalšího dne ráno.)*`,
