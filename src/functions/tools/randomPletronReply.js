@@ -47,7 +47,9 @@ module.exports = (client) => {
             "Ty maly darebaku."
         ];
 
+        
         const randomReply = replies[Math.floor(Math.random() * replies.length)]
+        console.log("LP odpověď : " + randomReply)
         return randomReply;
     }
 }

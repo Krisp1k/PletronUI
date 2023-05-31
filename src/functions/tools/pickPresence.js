@@ -23,8 +23,7 @@ module.exports = (client) => {
 
         const option = Math.floor(Math.random() * options.length);
 
-        client.user
-        .setPresence({
+        client.user.setPresence({
             activities: [
                 {
                     name: options[option].text,

@@ -12,6 +12,8 @@ module.exports = {
 
             try {
                 await command.run(interaction, client)
+                console.log(interaction.member.user.username, " - ", interaction.commandName, interaction.options._hoistedOptions)
+
                 // console.log(interaction)
 
             } catch (e) {

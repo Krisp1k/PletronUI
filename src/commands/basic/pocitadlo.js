@@ -74,11 +74,10 @@ module.exports = {
 
         const currPercentage = interaction.options.getNumber("procenta")
         const casyRozpadu = vypocetCasu(currPercentage);
-        const options = { hour: 'numeric', minute: 'numeric' };
 
         await interaction.reply({
-            content: `Artefakt dosáhne 0% v čase **${casyRozpadu.breakdownTime.toLocaleTimeString(undefined, options)}**.\n*(Kompletně se rozpadne v 5:55 hodin dalšího dne ráno.)*`,
-            ephemeral: true
+            content: `Artefakt (${currPercentage}%) dosáhne 0% v čase **${casyRozpadu.breakdownTime.toLocaleString()}**.\n*(Kompletně se rozpadne v 5:55 hodin dalšího dne ráno.)*`,
+            ephemeral: false
         })
     }
 }

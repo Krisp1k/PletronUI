@@ -22,7 +22,6 @@ module.exports = {
             finalString = `Pro server ${serverId} nebyli nalezeni žádní ČR.`
             return await interaction.reply(finalString)
         }
-
         const url = 'https://www.panhradu.cz/units_serialize.aspx?id_server=' + serverId
 
         const browser = await puppeteer.launch({ headless: true })
@@ -55,7 +54,7 @@ module.exports = {
             }
 
             if (contentPiece[2] === "10") {
-                
+
                 const tempString = `${crArtefakt} - [[${contentPiece[0]},${contentPiece[1]}]](https://panhradu.cz/main.aspx?x=${contentPiece[0]}&y=${contentPiece[1]})\n`
                 const finalStringLen = finalString.length
                 const tempStringLen = tempString.length
@@ -76,22 +75,22 @@ module.exports = {
             if (chunks.length > 0) {
                 console.log(chunks)
 
-                await interaction.reply({ 
-                    content: chunks[0], 
-                    ephemeral: false 
+                await interaction.reply({
+                    content: chunks[0],
+                    ephemeral: false
                 })
 
                 for (let i = 1; i < chunks.length; i++) {
-                    await interaction.followUp({ 
-                        content: chunks[i], 
-                        ephemeral: false 
-                    }); 
+                    await interaction.followUp({
+                        content: chunks[i],
+                        ephemeral: false
+                    });
                 }
             }
-        } catch(e){
+        } catch (e) {
             console.log(e)
             await interaction.reply("Problém s připojením")
         }
-        
+
     }
 }

@@ -42,6 +42,7 @@ module.exports = {
             });
         };
 
+        const msgAuthorId = interaction.user.id
         const action = interaction.options._hoistedOptions[0].value;
         const userId = interaction.options._hoistedOptions[1].value;
 
@@ -64,6 +65,16 @@ module.exports = {
 
             case 'stop':
                 const firstRow = await readFirstRow('src/data/mock.txt');
+            
+                // člověk se nemůže sám odmocknout
+                if (msgAuthorId == firstRow && msgAuthorId == userId) {
+                    await interaction.reply({
+                        content: `Nemůžeš zrušit mock sám sobě. Někdo jiný tě musí odmocknout ;)`,
+                        ephemeral: true,
+                    });
+                    return;
+                }
+
                 let mockCancelled = false;
 
                 if (firstRow === userId) {
@@ -79,7 +90,7 @@ module.exports = {
                     });
                 } else {
                     await interaction.reply({
-                        content: 'Ale však tohohle nenapodobuju, zajdi si k doktoroj',
+                        content: 'Ale však tohohle nenapodobuju, zajdi si k doktoroj a z peněž co zbydou kup kredity, potřebuju na dovolenou.',
                         ephemeral: true,
                     });
                 }

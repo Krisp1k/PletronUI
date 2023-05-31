@@ -14,6 +14,8 @@ const client = new Client({
 })
 client.commands = new Collection()
 client.commandArray = []
+client.startTime = null
+client.startTime = new Date(); // v ms
 
 const prefixes = ["LP", "lp", "Lp", "lP"]
 
@@ -29,20 +31,20 @@ for (const folder of functionFolders) {
 
 client.on('messageCreate', (msg) => {
 
-    const startsWithPrefix = prefixes.some(prefix => msg.content.startsWith(prefix));
+    const containsPrefix = prefixes.some(prefix => msg.content.includes(prefix));
+    const msgAuthor = msg.author.id
 
-    if (msg.author.bot) { return }
+    // co se asi stane, když bude mockovat zia lpho a lp ziu? :thinking:
+    // if (msg.author.bot) { return }
 
     // odpovedi
-    if (startsWithPrefix) {
-        const replyPromise = client.randomPletronReply().then((reply) => {
+    if (containsPrefix || msgAuthor == "861583144289042472") {
+        client.randomPletronReply().then((reply) => {
             msg.channel.send(reply)
         })
     }
 
     // mock
-    const msgAuthor = msg.author.id
-    
     readFirstRow('src/data/mock.txt')
         .then((firstRow) => {
             if (firstRow == msgAuthor) {
