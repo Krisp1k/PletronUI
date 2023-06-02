@@ -44,7 +44,10 @@ module.exports = (client) => {
             "Ver mi, zivot je mnohem plnejsi a stastnejsi, kdyz utraci penize za virtualni kredity misto za skutecne zazitky. Nebo ne?",
             "Jsem tak vytizeny programovanim, ze bych se mohl stat robotem misto clovekem.",
             "Tak co, stale chces ban? Mozna bych mel tesit lidi jako ty.",
-            "Ty maly darebaku."
+            "Ty maly darebaku.",
+            "Za to muze Terms",
+            "Za to muze Sae",
+            "Za to muze Toru"
         ];
 
         

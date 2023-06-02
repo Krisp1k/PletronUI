@@ -15,9 +15,6 @@ module.exports = {
         const nowTime = new Date();
         const uptimeDifference = nowTime - startTime
 
-        console.log("startTime", startTime)
-        console.log("now time", nowTime)
-
         const getTimeDifference = (start, end) => {
             const timeDiff = Math.abs(end.getTime() - start.getTime());
 

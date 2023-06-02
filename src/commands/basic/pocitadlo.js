@@ -20,7 +20,7 @@ module.exports = {
 
             // Výpočet času dosažení 0%
             const remainingPercentage = currentPercentage;
-            const remainingDamageCycles = Math.floor(remainingPercentage / 1);
+            const remainingDamageCycles = Math.floor(remainingPercentage / 3) + 1;
             const remainingHours = remainingDamageCycles * 8;
 
             let breakdownTime = new Date();
@@ -60,7 +60,7 @@ module.exports = {
 
             completeBreakdownTime.setDate(breakdownTime.getDate() + 1);
             completeBreakdownTime.setHours(5);
-            completeBreakdownTime.setMinutes(55);
+            completeBreakdownTime.setMinutes(5);
 
             if (completeBreakdownTime <= breakdownTime) {
                 completeBreakdownTime.setDate(completeBreakdownTime.getDate() + 1);
@@ -75,8 +75,16 @@ module.exports = {
         const currPercentage = interaction.options.getNumber("procenta")
         const casyRozpadu = vypocetCasu(currPercentage);
 
+        const options = { 
+            day: 'numeric', 
+            month: 'numeric', 
+            year: 'numeric', 
+            hour: 'numeric', 
+            minute: 'numeric', 
+        };
+
         await interaction.reply({
-            content: `Artefakt (${currPercentage}%) dosáhne 0% v čase **${casyRozpadu.breakdownTime.toLocaleString()}**.\n*(Kompletně se rozpadne v 5:55 hodin dalšího dne ráno.)*`,
+            content: `Artefakt (${currPercentage}%) dosáhne 0% v čase **${casyRozpadu.breakdownTime.toLocaleString('cs-CZ', options)}**.\n*(Kompletně se rozpadne v 5:05 hodin dalšího dne ráno.)*`,
             ephemeral: false
         })
     }

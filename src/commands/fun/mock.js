@@ -46,9 +46,28 @@ module.exports = {
         const action = interaction.options._hoistedOptions[0].value;
         const userId = interaction.options._hoistedOptions[1].value;
 
+        const firstRow = await readFirstRow('src/data/mock.txt');
+
+        // člověk se nemůže sám odmocknout
+        if (msgAuthorId == userId) {
+            await interaction.reply({
+                content: `Nemůžeš používat tento command, pokud na sobě máš mock ;)`,
+                ephemeral: true,
+            });
+            return;
+        }
+
         if (userId == "1110915541469773866") {
             await interaction.reply({
                 content: `To jsem já, to nemůžu`,
+                ephemeral: true,
+            });
+            return;
+        }
+
+        if (userId == "861583144289042472") {
+            await interaction.reply({
+                content: `Nemůžu tenhle command použít na ZIU, zeptejte se saeho proč.`,
                 ephemeral: true,
             });
             return;
@@ -64,17 +83,6 @@ module.exports = {
                 break;
 
             case 'stop':
-                const firstRow = await readFirstRow('src/data/mock.txt');
-            
-                // člověk se nemůže sám odmocknout
-                if (msgAuthorId == firstRow && msgAuthorId == userId) {
-                    await interaction.reply({
-                        content: `Nemůžeš zrušit mock sám sobě. Někdo jiný tě musí odmocknout ;)`,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
                 let mockCancelled = false;
 
                 if (firstRow === userId) {

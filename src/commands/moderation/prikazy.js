@@ -2,15 +2,20 @@ const { SlashCommandBuilder } = require('discord.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('help')
+        .setName('prikazy')
         .setDescription('Zobrazí všechny dostupné příkazy')
     ,
     async run(interaction, client) {
         
+        let finalString = "**__SEZNAM VŠECH DOSTUPNÝCH PŘÍKAZŮ__**\n\n";
+
+        client.commandArray.forEach(
+            command => finalString += `/**${command.name}** - ${command.description}\n`
+        )
+
         await interaction.reply({
-            content: "Na tomhle commandu se ještě pracuje, nebo jednoduše, vytvořil jsem ho a vysral se na něj.",
+            content: finalString,
             ephemeral: false
         }) 
-
     }
 }

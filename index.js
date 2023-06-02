@@ -35,7 +35,9 @@ client.on('messageCreate', (msg) => {
     const msgAuthor = msg.author.id
 
     // co se asi stane, když bude mockovat zia lpho a lp ziu? :thinking:
-    // if (msg.author.bot) { return }
+    if (msg.author.bot) { 
+        return ;
+    }
 
     // odpovedi
     if (containsPrefix || msgAuthor == "861583144289042472") {
