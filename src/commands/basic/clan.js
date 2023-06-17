@@ -103,7 +103,7 @@ module.exports = {
       for (let i = 1; i < chunks.length; i++) {
         await interaction.followUp({ content: chunks[i], ephemeral: true });
       }
-    
+
     } catch (e) {
       console.log(e)
       await interaction.reply("Problém s připojením")
