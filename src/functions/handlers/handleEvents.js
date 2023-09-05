@@ -15,12 +15,18 @@ module.exports = (client) => {
 
                         const event = require(`../../events/${folder}/${file}`)
 
-                        if (event.once) {
-                            client.once(event.name, (...args) => event.execute(...args, client))
+                        try {
+                            if (event.once) {
+                                client.once(event.name, (...args) => event.execute(...args, client))
+                            }
+                            else {
+                                client.on(event.name, (...args) => event.execute(...args, client))
+                            }
+                        } catch (err) {
+                            console.log(err)
                         }
-                        else {
-                            client.on(event.name, (...args) => event.execute(...args, client))
-                        }
+
+                        
                     }
                 default: break;
             }

@@ -3,6 +3,9 @@ const { InteractionType, EmbedBuilder } = require('discord.js')
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
+
+        if (!interaction) return;
+
         if (interaction.isChatInputCommand()) {
             const { commands } = client
             const { commandName } = interaction

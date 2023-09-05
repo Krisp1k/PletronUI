@@ -47,12 +47,16 @@ client.on('messageCreate', (msg) => {
     }
 
     // mock
-    readFirstRow('src/data/mock.txt')
-        .then((firstRow) => {
-            if (firstRow == msgAuthor) {
-                msg.channel.send(msg.content)
-            }
-        })
+    if (msg.attachments.size <= 0) { //kontrola, aby nemockoval obrázek (neumí to a crashne)
+    	
+        readFirstRow('src/data/mock.txt')
+            .then((firstRow) => {
+        	if (firstRow == msgAuthor) {
+                    msg.channel.send(msg.content)
+            	}
+             })
+    }
+    
 })
 
 function readFirstRow(filePath) {

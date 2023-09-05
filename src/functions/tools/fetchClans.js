@@ -27,6 +27,7 @@ module.exports = (client) => {
         };
 
         const browser = await puppeteer.launch({ headless: true });
+
         const pages = await Promise.all(
             Array.from({ length: 5 }, (_, i) => i + 3).map((i) =>
                 browser.newPage().then((page) =>
@@ -36,6 +37,7 @@ module.exports = (client) => {
                 )
             )
         );
+        
         await browser.close();
 
         pages.forEach((pageContent, i) => {

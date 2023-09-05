@@ -9,6 +9,7 @@ lerna-debug.log*
 
 #moje
 src/data/
+src/data/
 src/data/*.txt
 src/commands/basic/scan.js
 config.json
