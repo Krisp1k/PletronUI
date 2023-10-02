@@ -38,12 +38,13 @@ module.exports = {
             for (let i = 0; i < pocet; i++) {
                 const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
 
-                const url = `https://g.tenor.com/v1/search?q=${randomKeyword}&key=${process.env.TENORKEY}`
+                const url = `https://tenor.googleapis.com/v2/search?q=${randomKeyword}&key=${process.env.TENORKEY}`
 
                 const fetchData = async (data) => {
 
                     const index = Math.floor(Math.random() * data.results.length);
-                    const gifUrl = data.results[index].media[0].gif.url
+
+                    const gifUrl = data.results[index].media_formats.gif.url
 
                     const embed = new EmbedBuilder()
                         .setTitle(`KOŠIŠKAAAA`)

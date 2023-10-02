@@ -8,8 +8,6 @@ module.exports = {
             option.setName('počet')
                 .setDescription('Počet zpráv, které chceš mazat (0-100)')
                 .setRequired(true)
-                // .setMaxValue(100)
-                // .setMinValue(0)
         ),
     async run(interaction, client) {
 

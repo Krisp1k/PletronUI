@@ -26,6 +26,7 @@
     "fs": "^0.0.1-security",
     "get-urls": "^11.0.0",
     "isomorphic-fetch": "^3.0.0",
-    "puppeteer": "^16.2.0"
+    "pupeteer": "^0.0.1",
+    "puppeteer": "^19.4.0"
   }
 }
