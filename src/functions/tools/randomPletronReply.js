@@ -2,6 +2,7 @@
 module.exports = (client) => {
     client.randomPletronReply = async () => {
 
+        // const replies = await import("../../config/PletronReplies.mjs");
         const replies = [
             "Nerus, programuju, jsem programator.",
             "Mel jsem sen, ze jednoho dne budou lide vynakladat stejnou energii a penize na skutecne cile. Ale jsem rad, ze jsem se spletl.",
@@ -72,17 +73,15 @@ module.exports = (client) => {
             "Já už mám chybu... jsem idiot",
             "Ten můj algorytmus na arény je na hovno",
             ":smile:",
-	    "poko je na kluky",
+            "poko je na kluky",
             "Ok",
-	    "PH je PvP hra",
-	    "Neobtezuj, timhle se zabyva kriminalka a pravni zastupci",
-	    "...",
- 	    "Provokujes me a beres mi cas!!!",
-	    "Jdu obědvat.",
-            
+            "PH je PvP hra",
+            "Neobtezuj, timhle se zabyva kriminalka a pravni zastupci",
+            "...",
+            "Provokujes me a beres mi cas!!!",
+            "Jdu obědvat.",
         ];
 
-        
         const randomReply = replies[Math.floor(Math.random() * replies.length)]
         console.log("LP odpověď : " + randomReply)
         return randomReply;

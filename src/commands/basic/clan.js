@@ -10,7 +10,7 @@ module.exports = {
       option.setName('název')
         .setDescription('Název klanu přesně tak, jak ho lze nalézt ve hře')
         .setRequired(true)
-        .setMaxLength(512)),
+        .setMaxLength(64)),
 
   async run(interaction, client) {
 

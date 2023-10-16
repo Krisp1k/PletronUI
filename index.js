@@ -42,19 +42,26 @@ client.on('messageCreate', (msg) => {
     // odpovedi
     if (containsPrefix || msgAuthor == "861583144289042472") {
         client.randomPletronReply().then((reply) => {
-            msg.channel.send(reply)
+            try {
+                msg.channel.send(reply)
+            } catch (error) {
+                console.log(error)
+            }
+            
         })
     }
 
     // mock
     if (msg.attachments.size <= 0) { //kontrola, aby nemockoval obrázek (neumí to a crashne)
-    	
-        readFirstRow('src/data/mock.txt')
-            .then((firstRow) => {
-        	if (firstRow == msgAuthor) {
-                    msg.channel.send(msg.content)
-            	}
-             })
+    	try {
+            readFirstRow('src/data/mock.txt').then((firstRow) => {
+                if (firstRow == msgAuthor) {
+                        msg.channel.send(msg.content)
+                    }
+                })
+        } catch (error) {
+            console.log(error)
+        }
     }
     
 })
