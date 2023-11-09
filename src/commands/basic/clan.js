@@ -22,7 +22,7 @@ module.exports = {
 
         const chunks = [];
 
-        fs.readFile("src/data/clans.json", "utf8", async (err, data) => {
+        fs.readFileSync("src/data/clans.json", "utf8", async (err, data) => {
 
             if (err) {
                 console.error("Error reading file:", err);

@@ -20,52 +20,30 @@ module.exports = {
     ,
     async run(interaction, client) {
 
-        const writeToFile = (value) => {
-            fs.writeFile('src/data/mock.txt', value, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
-        };
-
-        const readFirstRow = (filePath) => {
-            return new Promise((resolve, reject) => {
-                fs.readFile(filePath, 'utf8', (error, data) => {
-                    if (error) {
-                        reject(error); return;
-                    }
-
-                    const rows = data.trim().split('\n');
-                    const firstRow = rows[0];
-                    resolve(firstRow);
-                });
-            });
-        };
-
         const msgAuthorId = interaction.user.id
+        const msgAuthorName = interaction.user.username
         const action = interaction.options._hoistedOptions[0].value;
-        const userId = interaction.options._hoistedOptions[1].value;
+        const userToBeMockedId = interaction.options._hoistedOptions[1].value;
+        const userToBeMockedName = interaction.options._hoistedOptions[1].user.username;
 
-        const firstRow = await readFirstRow('src/data/mock.txt');
+        const data = JSON.parse(fs.readFileSync('src/data/mock.json', 'utf8')) || {} ;
+        const mockedPeople = data["mocked"] || {};
 
-        // člověk se nemůže sám odmocknout
-        if (msgAuthorId == userId) {
+        if (mockedPeople[msgAuthorId]) {
             await interaction.reply({
                 content: `Nemůžeš používat tento command, pokud na sobě máš mock ;)`,
                 ephemeral: true,
             });
             return;
         }
-
-        if (userId == "1110915541469773866") {
+        else if (userToBeMockedId == "1110915541469773866") {
             await interaction.reply({
                 content: `To jsem já, to nemůžu`,
                 ephemeral: true,
             });
             return;
         }
-
-        if (userId == "861583144289042472") {
+        else if (userToBeMockedId == "861583144289042472") {
             await interaction.reply({
                 content: `Nemůžu tenhle command použít na ZIU, zeptejte se saeho proč.`,
                 ephemeral: true,
@@ -73,29 +51,64 @@ module.exports = {
             return;
         }
 
+        const updateMockData = (mockedPeople) => {
+            console.log("UPDATING MOCK DATA", mockedPeople)
+
+            const newData = {}
+            newData["mocked"] = mockedPeople;
+
+            try {
+                fs.writeFileSync('src/data/mock.json', JSON.stringify(newData));
+            } catch (err) {
+                console.error('Error writing to mock.json', err);
+            }
+        }
+
         switch (action) {
             case 'start':
-                writeToFile(userId);
+
+                if (mockedPeople[userToBeMockedId]) {
+                    await interaction.reply({
+                        content: `Jeho už napodobuju, psssst.....`,
+                        ephemeral: true,
+                    });
+                    return
+                }
+
+                if (!mockedPeople[userToBeMockedId]) {
+                    const newMockedPerson = {
+                        "id": userToBeMockedId,
+                        "username": userToBeMockedName,
+                        "mockedBy": msgAuthorName,
+                        "mockDate": new Date().toLocaleString('cs-CZ')
+                    }
+
+                    mockedPeople[userToBeMockedId] = newMockedPerson;
+                    updateMockData(mockedPeople);
+                }
+                
                 await interaction.reply({
-                    content: `Budu napodobovat toho šaška <@${userId}>`,
+                    content: `Budu napodobovat toho šaška <@${userToBeMockedId}>`,
                     ephemeral: true,
                 });
+
                 break;
 
             case 'stop':
                 let mockCancelled = false;
 
-                if (firstRow === userId) {
-                    console.log('ruším mock');
-                    writeToFile('none');
+                if (mockedPeople[userToBeMockedId]) {
+                    delete mockedPeople[userToBeMockedId];
+                    updateMockData(mockedPeople);
                     mockCancelled = true;
                 }
 
                 if (mockCancelled) {
                     await interaction.reply({
-                        content: `Přestanu napodobovat tohohle šaška <@${userId}>`,
+                        content: `Přestanu napodobovat tohohle šaška <@${userToBeMockedId}>`,
                         ephemeral: true,
                     });
+
                 } else {
                     await interaction.reply({
                         content: 'Ale však tohohle nenapodobuju, zajdi si k doktoroj a z peněž co zbydou kup kredity, potřebuju na dovolenou.',

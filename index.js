@@ -17,7 +17,7 @@ client.commandArray = []
 client.startTime = null
 client.startTime = new Date(); // v ms
 
-const prefixes = ["LP", "lp", "Lp", "lP"]
+const triggerWords = ["LP", "lp", "Lp", "lP"]
 
 const functionFolders = fs.readdirSync(`./src/functions`)
 for (const folder of functionFolders) {
@@ -31,55 +31,38 @@ for (const folder of functionFolders) {
 
 client.on('messageCreate', (msg) => {
 
-    const containsPrefix = prefixes.some(prefix => msg.content.includes(prefix));
+    const containsTriggerWord = triggerWords.some(prefix => msg.content.includes(prefix));
     const msgAuthor = msg.author.id
 
     // co se asi stane, když bude mockovat zia lpho a lp ziu? :thinking:
+    // keep commented else it will crash
     if (msg.author.bot) { 
         return ;
     }
 
     // odpovedi
-    if (containsPrefix || msgAuthor == "861583144289042472") {
+    if (containsTriggerWord || msgAuthor == "861583144289042472") {
         client.randomPletronReply().then((reply) => {
             try {
                 msg.channel.send(reply)
             } catch (error) {
                 console.log(error)
             }
-            
         })
     }
 
     // mock
     if (msg.attachments.size <= 0) { //kontrola, aby nemockoval obrázek (neumí to a crashne)
-    	try {
-            readFirstRow('src/data/mock.txt').then((firstRow) => {
-                if (firstRow == msgAuthor) {
-                        msg.channel.send(msg.content)
-                    }
-                })
+        try {
+            const mockData = JSON.parse(fs.readFileSync('src/data/mock.json', 'utf8')) || {} ;
+            if (mockData["mocked"][msgAuthor]) {
+                msg.channel.send(msg.content)
+            }
         } catch (error) {
-            console.log(error)
+            console.log("Mock failed, error: ", error)
         }
     }
-    
 })
-
-function readFirstRow(filePath) {
-    return new Promise((resolve, reject) => {
-        fs.readFile(filePath, 'utf8', (error, data) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-
-            const rows = data.trim().split('\n');
-            const firstRow = rows[0];
-            resolve(firstRow);
-        });
-    });
-}
 
 client.handleEvents()
 client.handleCommands()
