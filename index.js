@@ -81,9 +81,6 @@ function readFirstRow(filePath) {
     });
 }
 
-const token = process.env.TOKEN;
-console.log(token) // this logs out the correct token
-
 client.handleEvents()
 client.handleCommands()
 client.login(process.env.TOKEN)
