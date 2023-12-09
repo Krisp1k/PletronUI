@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js')
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -56,6 +57,14 @@ module.exports = {
 
             const newData = {}
             newData["mocked"] = mockedPeople;
+
+            if (!fs.existsSync(path.dirname('src/data/mock.json'))) {
+                fs.mkdirSync(path.dirname('src/data/mock.json'), { recursive: true });
+            }
+
+            if (!fs.existsSync('src/data/mock.json')) {
+                fs.writeFileSync('src/data/mock.json', JSON.stringify({}));
+            }
 
             try {
                 fs.writeFileSync('src/data/mock.json', JSON.stringify(newData));

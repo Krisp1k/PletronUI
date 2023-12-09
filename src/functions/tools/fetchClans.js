@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const path = require('path');
 
 module.exports = (client) => {
     client.fetchClans = async () => {
@@ -55,11 +56,19 @@ module.exports = (client) => {
             serverNum++;
         });
 
-        // save the json 
+        // check if the directory exists. if not, create it
+        if (!fs.existsSync(path.dirname('src/data/clans.json'))) {
+            fs.mkdirSync(path.dirname('src/data/clans.json'), { recursive: true });
+        }
+
+        // check if the file exists. if not create it empty and then write
+        if (!fs.existsSync('src/data/clans.json')) {
+            fs.writeFileSync('src/data/clans.json', JSON.stringify({}));
+        }
+
         fs.writeFileSync('src/data/clans.json', JSON.stringify(clans));
         client.clans = clans;
 
-        // console.log(clans)
         console.log("[CRON] Clans updated")
     }
 }

@@ -68,7 +68,7 @@ module.exports = (client) => {
             "Promin, volaji mi ted z casablanky",
             "ja ti nelzu",
             "Ty uličníku, že ty načítáš scripty?! Jo promiň, to je klanový popis!",
-            ":NmeckoNaTopu: :NmeckoNaTopu: :NmeckoNaTopu: :NmeckoNaTopu: ",
+            "<:NmeckoNaTopu:1091837509765443644> <:NmeckoNaTopu:1091837509765443644> <:NmeckoNaTopu:1091837509765443644>",
             "Asi bys neměl kamarádům říkat, že ti platím.",
             "Já už mám chybu... jsem idiot",
             "Ten můj algorytmus na arény je na hovno",
@@ -80,10 +80,16 @@ module.exports = (client) => {
             "...",
             "Provokujes me a beres mi cas!!!",
             "Jdu obědvat.",
+            "Já jsem si myslel, že jsi chytrý, ale ty jsi ještě větší idiot než já.",
+            "nevim",
+            "asi jo",
+            "Nechci tě zklamat, ale já jsem taky jenom člověk.",
+            "je mi to jedno",
+
         ];
 
         const randomReply = replies[Math.floor(Math.random() * replies.length)]
-        console.log("LP odpověď : " + randomReply)
+        console.log("[LP RNG RESPONSE]" + randomReply)
         return randomReply;
     }
 }
