@@ -17,8 +17,8 @@ module.exports = {
 
 :bulb:  **MOŽNOSTI INSTALACE:**
 
-1. Přímý odkaz na stažení z [Google store](https://chrom) 
-2. Návod na stažení + download link také na [webu Valyrie](https://valyrie.krisp1k.eu/extension)
+1. Přímý odkaz na stažení z [Google store](https://chromewebstore.google.com/detail/valyrie-p%C3%A1n-hradu/gcnbfklialdfahdgmgpofnjekopdgekm?hl=cs&pli=1) 
+2. Návod na stažení + download link také na [webu Valyrie](https://valyrie.krisp1k.eu/extension/)
 
 :tools:  **FUNKCE:**
 
