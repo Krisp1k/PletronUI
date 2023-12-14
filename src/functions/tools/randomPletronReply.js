@@ -1,7 +1,5 @@
-
 module.exports = (client) => {
     client.randomPletronReply = async () => {
-
         // const replies = await import("../../config/PletronReplies.mjs");
         const replies = [
             "Nerus, programuju, jsem programator.",
@@ -85,11 +83,11 @@ module.exports = (client) => {
             "asi jo",
             "Nechci tě zklamat, ale já jsem taky jenom člověk.",
             "je mi to jedno",
-
+            "https://c.tenor.com/0a_xdCNLGmMAAAAd/tenor.gif",
         ];
 
-        const randomReply = replies[Math.floor(Math.random() * replies.length)]
-        console.log("[LP RNG RESPONSE]" + randomReply)
+        const randomReply = replies[Math.floor(Math.random() * replies.length)];
+        console.log("[LP RNG RESPONSE]" + randomReply);
         return randomReply;
-    }
-}
+    };
+};
