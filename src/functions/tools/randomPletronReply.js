@@ -84,6 +84,7 @@ module.exports = (client) => {
             "Nechci tě zklamat, ale já jsem taky jenom člověk.",
             "je mi to jedno",
             "https://c.tenor.com/0a_xdCNLGmMAAAAd/tenor.gif",
+            "https://cdn.discordapp.com/attachments/1084272870244483122/1185943871461531719/409185517_7177670042264652_6804470949511447860_n.png?ex=6591734c&is=657efe4c&hm=a88129d20774f00a5c8e2252816d70debb95854114a276bbe66b6a320a45762a&"
         ];
 
         const randomReply = replies[Math.floor(Math.random() * replies.length)];
