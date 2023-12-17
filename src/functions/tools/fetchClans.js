@@ -56,11 +56,6 @@ module.exports = (client) => {
             serverNum++;
         });
 
-        // check if the directory exists. if not, create it
-        if (!fs.existsSync(path.dirname('src/data/clans.json'))) {
-            fs.mkdirSync(path.dirname('src/data/clans.json'), { recursive: true });
-        }
-
         // check if the file exists. if not create it empty and then write
         if (!fs.existsSync('src/data/clans.json')) {
             fs.writeFileSync('src/data/clans.json', JSON.stringify({}));
