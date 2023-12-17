@@ -18,7 +18,17 @@ module.exports = {
         const fetchData = async (data) => {
 
             const index = Math.floor(Math.random() * data.results.length);
-            const gifUrl = data.results[index].media_formats.gif.url
+            const gifUrl = data.results[index].media_formats.gif.url || null;
+
+			// prevent crashing if gifUrl is undefined
+			if (!gifUrl || gifUrl === null) {
+				await interaction.reply({
+					content: 'Něco se pokazilo, zkuste to prosím znovu.',
+					ephemeral: true,
+				})
+				return
+			}
+
 
             const embed = new EmbedBuilder()
                 .setTitle(`'${keywords}' GIF`)
