@@ -8,7 +8,7 @@ const openai = new OpenAI({
 const settings = {
     model: "gpt-3.5-turbo",
     temp: 1.5,
-    tokens: 380,
+    tokens: 500,
     p: 1,
     freq: 0.5,
     pres: 0.5,

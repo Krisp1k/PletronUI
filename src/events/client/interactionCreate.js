@@ -15,7 +15,7 @@ module.exports = {
 
             try {
                 await command.run(interaction, client)
-                console.log(interaction.member.user.username, " - ", interaction.commandName, interaction.options._hoistedOptions)
+                console.log("[COMMAND] (NAME: ", interaction.commandName, ", USER: ", interaction.member.user.username,", OPTIONS: ", interaction.options._hoistedOptions)
                 
                 // console.log(interaction)  
 
