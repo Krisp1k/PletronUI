@@ -10,7 +10,7 @@ module.exports = {
         .setName("otazka")
         .setDescription("Jakou otázku chceš položit?")
         .setRequired(true)
-        .setMaxLength(100)
+        .setMaxLength(125)
     ),
   async run(interaction, client) {
 
