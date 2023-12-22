@@ -41,6 +41,13 @@ client.on("messageCreate", (msg) => {
         return;
     }
 
+    // console.log(msg)
+
+    switch (msg.author.id) {
+        case "301406857132769281": msg.react("<a:atomvecer:1187887385019678811>"); break;
+        case "586661245797531698": msg.react("🥧"); break;
+    }
+
     // odpovedi
     if (containsTriggerWord || msgAuthor == "861583144289042472") {
         client.randomPletronReply().then((reply) => {
