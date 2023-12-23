@@ -2,7 +2,6 @@ const { ActivityType } = require('discord.js')
 
 module.exports = (client) => {
     client.pickPresence = async () => {
-
         const options = [
             {
                 type: ActivityType.Playing,
@@ -22,7 +21,6 @@ module.exports = (client) => {
         ];
 
         const option = Math.floor(Math.random() * options.length);
-
         client.user.setPresence({
             activities: [
                 {
@@ -32,7 +30,6 @@ module.exports = (client) => {
             ],
             status: options[option].status
         })
-
         // console.log("[CRON] Presence updated")
     }
 }

@@ -7,45 +7,30 @@ require('dotenv').config()
 module.exports = (client) => {
     client.handleCommands = async () => {
         const commandFolders = fs.readdirSync("./src/commands")
-
         for (const folder of commandFolders) {
             const commandFiles = fs
                 .readdirSync(`./src/commands/${folder}`)
                 .filter((file) => file.endsWith('.js'))
 
             const { commands, commandArray } = client
-
             for (const file of commandFiles) {
                 const command = require(`../../commands/${folder}/${file}`)
-                
                 commands.set(command.data.name, command)
-
-                //if (!command.slashInfo?.enabled) return;
-                //commandArray.push(command.data.getSlashInfo());
-
                 commandArray.push(command.data.toJSON())
-
                 console.log(command.data.name + " registered")
             }
         }
 
         const clientId = '1110915541469773866'
-        //const guildId = '1010922744113811456'
-        //const guildIds = client.guilds.cache.map(guild => guild.id)
-
         client.guilds.cache.map(guild => console.log(guild.id))
-
         const rest = new REST({version: '9'}).setToken(process.env.token)
 
         try {
             console.log("Refreshing app (/) commands")
-
             await rest.put(Routes.applicationCommands(clientId), {
                 body: client.commandArray,
             })
-            
-            console.log("Done refreshing app (/) commands")
-            
+            console.log("Done refreshing app (/) commands") 
         } catch (e) {
             console.error(e)
             return

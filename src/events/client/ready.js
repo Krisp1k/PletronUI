@@ -13,8 +13,6 @@ module.exports = {
         client.fetchClans()
         setInterval(client.fetchClans, this.fetchClansDelay * 1000 * this.fetchClansDelay)
 
-
         console.log('jedu jak drak a jsem ' + client.user.tag)
     }
-
 }
