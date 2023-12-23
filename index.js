@@ -10,13 +10,12 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildBans,
+		GatewayIntentBits.GuildMessageReactions,
     ],
 });
 client.commands = new Collection();
 client.commandArray = [];
-client.startTime = null;
 client.startTime = new Date(); // v ms
-
 const triggerWords = ["LP", "lp", "Lp", "lP"];
 
 const functionFolders = fs.readdirSync(`./src/functions`);
