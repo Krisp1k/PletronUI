@@ -29,7 +29,7 @@ for (const folder of functionFolders) {
         require(`./src/functions/${folder}/${file}`)(client);
 }
 
-client.on("messageCreate", (msg) => {
+client.on("messageCreate", async (msg) => {
     const containsTriggerWord = triggerWords.some((prefix) =>
         msg.content.includes(prefix)
     );
@@ -43,14 +43,19 @@ client.on("messageCreate", (msg) => {
 
     // console.log(msg)
 
-    switch (msg.author.id) {
-        case "301406857132769281": msg.react("<a:atomvecer:1187887385019678811>"); break;
-        case "586661245797531698": msg.react("🥧"); break;
-    }
+	try {
+		switch (msg.author.id) {
+			case "301406857132769281": msg.react("<a:atomvecer:1187887385019678811>"); break;
+			case "586661245797531698": msg.react("🥧"); break;
+		}
+	} catch (error) {
+		console.error(`Error reacting to message: ${error.message}`);
+	}
+
 
     // odpovedi
     if (containsTriggerWord || msgAuthor == "861583144289042472") {
-        client.randomPletronReply().then((reply) => {
+        await client.randomPletronReply().then((reply) => {
             try {
                 msg.channel.send(reply);
             } catch (error) {
@@ -67,15 +72,15 @@ client.on("messageCreate", (msg) => {
 
             if (mockData["mocked"][msgAuthor]) {
                 if (msg.content == "" || msg.content == null) {
-                    msg.channel.send(":thinking:");
+                    await msg.channel.send(":thinking:");
                 } else {
-                    msg.channel.send(msg.content);
+                    await msg.channel.send(msg.content);
                 }
 
                 if (msg.attachments.size > 0) {
-                    msg.attachments.forEach((attachment) => {
-                        msg.channel.send(attachment.url);
-                    });
+                    msg.attachments.forEach(async (attachment) => {
+						await msg.channel.send(attachment.url);
+					});
                 }
             }
         } catch (error) {
