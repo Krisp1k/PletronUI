@@ -13,6 +13,7 @@ const client = new Client({
 		GatewayIntentBits.GuildMessageReactions,
     ],
 });
+
 client.commands = new Collection();
 client.commandArray = [];
 client.startTime = new Date(); // v ms
@@ -42,14 +43,14 @@ client.on("messageCreate", async (msg) => {
 
     // console.log(msg)
 
-	try {
-		switch (msg.author.id) {
-			case "301406857132769281": msg.react("<a:atomvecer:1187887385019678811>"); break;
-			case "586661245797531698": msg.react("🥧"); break;
-		}
-	} catch (error) {
-		console.error(`Error reacting to message: ${error.message}`);
-	}
+	// try {
+	// 	switch (msg.author.id) {
+	// 		case "301406857132769281": msg.react("<a:atomvecer:1187887385019678811>"); break;
+	// 		case "586661245797531698": msg.react("🥧"); break;
+	// 	}
+	// } catch (error) {
+	// 	console.error(`Error reacting to message: ${error.message}`);
+	// }
 
 
     // odpovedi
@@ -63,7 +64,7 @@ client.on("messageCreate", async (msg) => {
         });
     }
 
-    //kontrola, aby nemockoval stickery (neumí to a crashne) [Discord API to nema vyresene asi]
+    // kontrola, aby nemockoval stickery (neumí to a crashne) [Discord API to nema vyresene asi]
     if (msg.stickers.size <= 0) {
         try {
             const mockData =

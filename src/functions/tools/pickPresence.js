@@ -30,6 +30,5 @@ module.exports = (client) => {
             ],
             status: options[option].status
         })
-        // console.log("[CRON] Presence updated")
     }
 }

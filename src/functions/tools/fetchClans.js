@@ -4,6 +4,12 @@ const fs = require('fs');
 module.exports = (client) => {
     client.fetchClans = async () => {
 
+		let serverNum = 3 // start;
+        const clans = {
+			"clanList": null, // TO BE UPDATED 
+			"lastUpdateTime": new Date(),
+		};
+
         const browser = await puppeteer.launch({ headless: 'new' });
         const pages = await Promise.all(
             Array.from({ length: 5 }, (_, i) => i + 3).map((i) =>
@@ -16,9 +22,6 @@ module.exports = (client) => {
         );
 
         await browser.close();
-
-        const clans = {};
-        let serverNum = 3 // start;
 
         pages.forEach((pageContent, ) => {
             const newContent = pageContent.replace(/&gt/g, "");
@@ -37,20 +40,23 @@ module.exports = (client) => {
 
                 const lowerCaseKlanName = klanName.toLowerCase();
 
-                clans[lowerCaseKlanName] = clans[lowerCaseKlanName] || {};
-                clans[lowerCaseKlanName]["name"] = klanName;
-                clans[lowerCaseKlanName]["server"] = serverNum;
-                clans[lowerCaseKlanName]["members"] = clans[lowerCaseKlanName]["members"] || [];
+                clans["clanList"][lowerCaseKlanName] = clans["clanList"] != null ? clans["clanList"][lowerCaseKlanName] : null;
 
-                if (memberName && clans[lowerCaseKlanName]["members"].find((member) => member.name === memberName) === undefined) {
-                    const newMember = {
-                        name: memberName,
-                        x_cord: x,
-                        y_cord: y
-                    }
+                if (clans["clanList"][lowerCaseKlanName]) {
+					clans["clanList"][lowerCaseKlanName]["name"] = klanName;
+					clans["clanList"][lowerCaseKlanName]["server"] = serverNum;
+					clans["clanList"][lowerCaseKlanName]["members"] = clans["clanList"][lowerCaseKlanName]["members"] || [];
 
-                    clans[lowerCaseKlanName]["members"].push(newMember);
-                }
+					if (memberName && clans["clanList"][lowerCaseKlanName]["members"].find((member) => member.name === memberName) === undefined) {
+						const newMember = {
+							name: memberName,
+							x_cord: x,
+							y_cord: y
+						}
+
+						clans["clanList"][lowerCaseKlanName]["members"].push(newMember);
+					}
+				}
             });
             serverNum++;
         });
