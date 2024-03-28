@@ -6,7 +6,7 @@ module.exports = (client) => {
 
 		let serverNum = 3 // start;
         const clans = {
-			"clanList": null, // TO BE UPDATED 
+			"clanList": [], // TO BE UPDATED 
 			"lastUpdateTime": new Date(),
 		};
 

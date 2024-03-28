@@ -1,6 +1,5 @@
 module.exports = (client) => {
     client.randomPletronReply = async () => {
-        // const replies = await import("../../config/PletronReplies.mjs");
         const replies = [
             { rarity: 0.1, text: "Nerus, programuju, jsem programator." },
             { rarity: 0.05, text: "Mel jsem sen, ze jednoho dne budou lide vynakladat stejnou energii a penize na skutecne cile. Ale jsem rad, ze jsem se spletl." },

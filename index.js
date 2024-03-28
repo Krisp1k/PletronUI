@@ -9,15 +9,15 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildBans,
 		GatewayIntentBits.GuildMessageReactions,
     ],
 });
 
-client.commands = new Collection();
 client.commandArray = [];
+client.commands = new Collection();
 client.startTime = new Date(); // v ms
-const triggerWords = ["LP", "lp", "Lp", "lP"];
+
+const triggerWord = "LP";
 
 const functionFolders = fs.readdirSync(`./src/functions`);
 for (const folder of functionFolders) {
@@ -30,40 +30,38 @@ for (const folder of functionFolders) {
 }
 
 client.on("messageCreate", async (msg) => {
-    const containsTriggerWord = triggerWords.some((prefix) =>
-        msg.content.includes(prefix)
-    );
+
     const msgAuthor = msg.author.id;
+    if (msg.author.bot) return;
 
-    // co se asi stane, když bude mockovat zia lpho a lp ziu? :thinking:
-    // keep commented else it will crash
-    if (msg.author.bot) {
-        return;
-    }
+    const containsTriggerWord = msg.content.toLowerCase().includes(triggerWord.toLowerCase());
+    const isTriggerWord = msg.content.toLowerCase() === triggerWord.toLowerCase();
 
-    // console.log(msg)
-
-	// try {
-	// 	switch (msg.author.id) {
-	// 		case "301406857132769281": msg.react("<a:atomvecer:1187887385019678811>"); break;
-	// 		case "586661245797531698": msg.react("🥧"); break;
-	// 	}
-	// } catch (error) {
-	// 	console.error(`Error reacting to message: ${error.message}`);
-	// }
-
-
-    // odpovedi
-    if (containsTriggerWord || msgAuthor == "861583144289042472") {
+    // REPLIES
+    if (isTriggerWord) {
+        // pokud zprava je pouze "lp", tak nebudeme odpovidat pres GPT api
         await client.randomPletronReply().then((reply) => {
-            try {
-                msg.channel.send(reply);
-            } catch (error) {
-                console.log(error);
-            }
+            msg.channel.send(reply);
         });
-    }
 
+    } else if (containsTriggerWord) {
+        // pokud zprava obsahuje "lp", ale zaroven to neni pouze samotne slovo, tak si hodime kostkou, zda odpovime random reply nebo pres GPT api
+        try {
+            if (Math.random() < 0.25) { // 75% šance na GPT ?
+                await client.randomPletronReply().then((reply) => {
+                    msg.channel.send(reply);
+                });
+            } else {
+                const gptReply = (await import("./src/config/OpenAI_API.mjs")).gptReply;
+                const response = await gptReply(msg.content);
+                msg.reply(response);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    // MOCK
     // kontrola, aby nemockoval stickery (neumí to a crashne) [Discord API to nema vyresene asi]
     if (msg.stickers.size <= 0) {
         try {
