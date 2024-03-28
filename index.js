@@ -34,6 +34,7 @@ client.on("messageCreate", async (msg) => {
     const msgAuthor = msg.author.id;
     if (msg.author.bot) return;
 
+    msg.content = msg.content.trim();
     const containsTriggerWord = msg.content.toLowerCase().includes(triggerWord.toLowerCase());
     const isTriggerWord = msg.content.toLowerCase() === triggerWord.toLowerCase();
 
