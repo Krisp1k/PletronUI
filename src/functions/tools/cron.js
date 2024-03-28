@@ -4,22 +4,22 @@ module.exports = (client) => {
 	client.cronJobs = 
 	{
 		fetchClans: CronJob.from({
-			cronTime: '* * */1 * * *',
+			cronTime: '@hourly',
 			onTick: async () => { 
 				await client.fetchClans();
 			},
 			onComplete: console.log("[CRON] fetchClans finished"),
-			start: false,
+			start: true,
 			timeZone: 'Europe/London'
 		}),
 
 		pickPresence: CronJob.from({
-			cronTime: '* */1 * * * *',
+			cronTime: '*/1 * * * *',
 			onTick: async () => { 
 				await client.pickPresence();
 			},
 			onComplete: console.log("[CRON] PickPresence finished"),
-			start: false,
+			start: true,
 			timeZone: 'Europe/London'
 		}),
 	}
