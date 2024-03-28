@@ -32,7 +32,7 @@ module.exports = {
             try {
                 const clansJson = JSON.parse(data);
                 const lowercaseVyhledavanyKlan = vyhledavanyKlan.toLowerCase();
-                const clanMembers = clansJson[lowercaseVyhledavanyKlan]["members"];
+                const clanMembers = clansJson["clanList"][lowercaseVyhledavanyKlan]["members"];
 
                 for (const member of clanMembers) {
                     const tempString = `**:bust_in_silhouette: ${member.name}** - [[${member.x_cord},${member.y_cord}]](https://panhradu.cz/main.aspx?x=${member.x_cord}&y=${member.y_cord})\n`;
