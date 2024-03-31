@@ -39,7 +39,7 @@ client.on("messageCreate", async (msg) => {
     const isTriggerWord = msg.content.toLowerCase() === triggerWord.toLowerCase();
 
     // REPLIES
-    if (isTriggerWord || msg.content.length <= 5) {
+    if (isTriggerWord || (containsTriggerWord && msg.content.length <= 5)) {
         // pokud zprava je pouze "lp", tak nebudeme odpovidat pres GPT api
         await client.randomPletronReply().then((reply) => {
             msg.channel.send(reply);
