@@ -44,7 +44,9 @@ client.on("messageCreate", async (msg) => {
 		try {
 			const gptReply = (await import("./src/config/OpenAI_API.mjs")).gptReply;
 			const response = await gptReply(msg.content, true);
-			msg.reply(response);
+			setTimeout(() => {
+				msg.channel.send(response);
+			}, 30000);
 		} catch (error) {
 			console.log(error);
 		}
