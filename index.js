@@ -13,6 +13,7 @@ const client = new Client({
 	],
 });
 
+client.logMessages = [];
 client.commandArray = [];
 client.commands = new Collection();
 client.startTime = new Date(); // v ms
@@ -40,15 +41,14 @@ client.on("messageCreate", async (msg) => {
 
 	// custom andry reply
 	if (msg.channel.id == "1223380151203659856" && msg.author.id == "1158467740672208969") {
-		console.log("andry mluvi")
 		try {
 			const gptReply = (await import("./src/config/OpenAI_API.mjs")).gptReply;
-			const response = await gptReply(msg.content, true);
+			const response = await gptReply(msg.content, true, client);
 			setTimeout(() => {
 				msg.channel.send(response);
 			}, 30000);
 		} catch (error) {
-			console.log(error);
+			client.log("ERROR", error.message, "GPT API");
 		}
 	}
 
@@ -68,11 +68,11 @@ client.on("messageCreate", async (msg) => {
 				});
 			} else {
 				const gptReply = (await import("./src/config/OpenAI_API.mjs")).gptReply;
-				const response = await gptReply(msg.content, false);
+				const response = await gptReply(msg.content, false, client);
 				msg.reply(response);
 			}
 		} catch (error) {
-			console.log(error);
+			client.log("ERROR", error.message, "GPT API");
 		}
 	}
 
@@ -97,7 +97,7 @@ client.on("messageCreate", async (msg) => {
 				}
 			}
 		} catch (error) {
-			console.log("Mock failed, error: ", error);
+			client.log("ERROR", error.message, "Mock");
 		}
 	}
 });

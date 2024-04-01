@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import client from "../../index.js";
 
 const openai = new OpenAI({
 	organization: process.env.OPENAI_ORG,
@@ -76,8 +77,9 @@ const settings = {
 	},
 };
 
-export const gptReply = async (inputText, andry) => {
-	console.log("[AI MENTION] Processing input text: " + inputText);
+export const gptReply = async (inputText, andry, client) => {
+
+	await client.log("AI", "Processing input text: " + inputText, "GPT API");
 
 	let response, moodContent;
 	if (andry) {
@@ -102,23 +104,24 @@ export const gptReply = async (inputText, andry) => {
 				],
 				max_tokens: settings.tokens,
 			})
-			.catch((error) => {
-				console.log("[AI MENTION] Processing failed, error: \n" + error);
+			.catch(async (error) => {
+				await client.log("AI ERROR", "Processing failed, error: \n" + error.message, "GPT API");
 				return "Jsem moc zmatený, nedokážu ti teď odpovědět";
 			});
 
 		const answer = response.choices[0].message.content;
-		console.log("[AI MENTION] Successfully processed");
+		await client.log("AI", "Successfully processed", "GPT API")
 		return answer;
 
 	} catch (error) {
-		console.log("[AI MENTION] Processing failed, error: \n" + error);
+		await client.log("AI ERROR", "Processing failed, error: \n" + error.message, "GPT API");
 		return "Jsem moc zmatený, nedokážu ti teď odpovědět";
 	}
 }
 
-export const askResponse = async (inputText) => {
-	console.log("[AI] Processing input text: " + inputText);
+export const askResponse = async (inputText, client) => {
+
+	await client.log("AI", "Processing input text: " + inputText, "GPT API");
 
 	let moodContent, moodString, response;
 	let currentRarity = 0;
@@ -130,7 +133,7 @@ export const askResponse = async (inputText) => {
 		if (randomChance <= currentRarity) {
 			moodContent = mood.content;
 			moodString = mood.name;
-			console.log("[AI] Selected Mood: " + moodString);
+			await client.log("AI", "Selected mood: " + moodString, "GPT API");
 			try {
 				response = await openai.chat.completions
 					.create({
@@ -147,17 +150,17 @@ export const askResponse = async (inputText) => {
 						],
 						max_tokens: settings.tokens,
 					})
-					.catch((error) => {
-						console.log("[AI] Processing failed, error: \n" + error);
+					.catch(async (error) => {
+						await client.log("AI ERROR", "Processing failed, error: \n" + error.message, "GPT API");
 						return "Jsem moc zmatený, nedokážu ti teď odpovědět";
 					});
 			} catch (error) {
-				console.log("[AI] Processing failed, error: \n" + error);
+				await client.log("AI ERROR", "Processing failed, error: \n" + error.message, "GPT API");
 				return "Jsem moc zmatený, nedokážu ti teď odpovědět";
 			}
 
 			const answer = response.choices[0].message.content;
-			console.log("[AI] Successfully processed");
+			await client.log("AI", "Successfully processed", "GPT API")
 
 			return answer;
 		}
