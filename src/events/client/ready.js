@@ -4,13 +4,13 @@ module.exports = {
 	presenceDelay: 30, // seconds
 	fetchClansDelay: 90, // minutes
 	async execute(client) {
-		console.log('jedu jak drak a jsem ' + client.user.tag)
+		await client.log("BOT", `Logged in as ${client.user.tag}`);
 
 		for (const job of Object.values(client.cronJobs)) {
 			await job.start();
 
 			if (!job.running) {
-				console.log("[CRON] Job failed to run");
+				await client.log("CRON", `Job ${job.name} failed to start`);
 			}
 		}
 	}

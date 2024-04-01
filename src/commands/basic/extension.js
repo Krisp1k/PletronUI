@@ -1,18 +1,25 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('extension')
-        .setDescription('Valyrijské rozšíření do Google Chrome')
-    ,
-    async run(interaction, client) {
+	data: new SlashCommandBuilder()
+		.setName('extension')
+		.setDescription('Valyrijské rozšíření do Google Chrome')
+	,
+	async run(interaction, client) {
 
-        const embed = new EmbedBuilder()
-            .setTitle(`Skvost Valyrijských IT inženýrů!`)
-            .setThumbnail('https://valyrie.krisp1k.eu/wp-content/uploads/2023/08/cropped-bg.webp')
-            .setColor(0x18e1ee)
-            .setTimestamp(Date.now())
-            .setDescription(`
+		// this command is under maintenance
+		return await interaction.reply({
+			content:
+				"Tento příkaz je momentálně nedostupný, promiň.",
+			ephemeral: true,
+		});
+
+		const embed = new EmbedBuilder()
+			.setTitle(`Skvost Valyrijských IT inženýrů!`)
+			.setThumbnail('https://valyrie.krisp1k.eu/wp-content/uploads/2023/08/cropped-bg.webp')
+			.setColor(0x18e1ee)
+			.setTimestamp(Date.now())
+			.setDescription(`
 **Valyrie - Pán hradu** je rozšíření do Google Chrome, které vám zjednoduší hraní Pána Hradu pomocí různých nástrojů a hledáčků.
 
 :bulb:  **MOŽNOSTI INSTALACE:**
@@ -27,8 +34,8 @@ module.exports = {
 - **Raid module** - Vizuální zobrazení magických efektů na jednotce přímo na mapě (nemusíš klikat na jednotku)
 - **Teleport Tool** - Jednotně vypočítá časy dopadu portálů našich hráčů na určitý cíl.`);
 
-        await interaction.reply({
-            embeds: [embed],
-        });
-    }
+		await interaction.reply({
+			embeds: [embed],
+		});
+	}
 }

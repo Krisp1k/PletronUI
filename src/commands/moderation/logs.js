@@ -2,8 +2,8 @@ const { SlashCommandBuilder } = require('discord.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('kys')
-		.setDescription('Co asi dělá?')
+		.setName('logs')
+		.setDescription('Posledních 10 logů.')
 	,
 	async run(interaction, client) {
 
@@ -12,12 +12,17 @@ module.exports = {
 		]
 
 		if (allowedPlayers.includes(interaction.member.id)) {
+			let logMessage = "```";
+			for (const log of client.logMessages) {
+				logMessage += `${log.time} [${log.type}] - ${log.author} - ${log.message}\n`;
+			}
+			logMessage += "```";
+
 			await interaction.reply({
-				content: "Vypínám se...",
+				content: logMessage,
 				ephemeral: true
 			});
-			await client.log("COMMAND", "Zdeněk se na přání příkazu vypíná", interaction.member.user.username)
-			process.exit(0);
+
 		} else {
 			await interaction.reply({
 				content: "Na tento příkaz nemáš oprávnění.",
