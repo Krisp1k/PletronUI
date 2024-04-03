@@ -17,7 +17,8 @@ module.exports = {
 				.setRequired(true)
 				.addChoices(
 					{ name: "Start", value: "start" },
-					{ name: "Stop", value: "stop" }
+					{ name: "Stop", value: "stop" },
+					{ name: "List", value: "list" }
 				)
 		)
 		.addUserOption((option) =>
@@ -132,6 +133,19 @@ module.exports = {
 					});
 				}
 
+				break;
+
+			case "list":
+				const mockedData = fs.readFileSync("src/data/mock.json", "utf8");
+				const mockedPeopleArray = Object.values(mockedData);
+				const mockedPeopleString = mockedPeopleArray.map((person) => {
+					return `<@${person.id}> | od: ${person.mockDate} | autor: ${person.mockedBy} `;
+				});
+
+				await interaction.reply({
+					content: `Seznam napodobených lidí: \n${mockedPeopleString.join("\n")} `,
+					ephemeral: true,
+				});
 				break;
 		}
 	},
