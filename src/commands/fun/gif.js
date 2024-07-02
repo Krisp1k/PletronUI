@@ -16,10 +16,8 @@ module.exports = {
         const url = `https://tenor.googleapis.com/v2/search?q=${keywords}&key=${process.env.TENORKEY}`
 
         const fetchData = async (data) => {
-
             const index = Math.floor(Math.random() * data.results.length);
             const gifUrl = data.results[index].media_formats.gif.url || null;
-
 			// prevent crashing if gifUrl is undefined
 			if (!gifUrl || gifUrl === null) {
 				await interaction.reply({
@@ -28,7 +26,6 @@ module.exports = {
 				})
 				return
 			}
-
 
             const embed = new EmbedBuilder()
                 .setTitle(`'${keywords}' GIF`)

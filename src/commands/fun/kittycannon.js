@@ -17,7 +17,6 @@ module.exports = {
 		function delay(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
-
 		const keywords = [
 			"cat",
 			"cute cat",
@@ -37,15 +36,11 @@ module.exports = {
 		async function processCats() {
 			for (let i = 0; i < pocet; i++) {
 				const randomKeyword = keywords[Math.floor(Math.random() * keywords.length)];
-
 				const url = `https://tenor.googleapis.com/v2/search?q=${randomKeyword}&key=${process.env.TENORKEY}`
 
 				const fetchData = async (data) => {
-
 					const index = Math.floor(Math.random() * data.results.length);
-
 					const gifUrl = data.results[index].media_formats.gif.url
-
 					const embed = new EmbedBuilder()
 						.setTitle(`KOŠIŠKAAAA`)
 						.setColor(0x18e1ee)
@@ -56,11 +51,9 @@ module.exports = {
 
 				const sendGif = async (embed) => {
 					try {
-
 						await interaction.channel.send({
 							embeds: [embed]
 						})
-
 					} catch (err) {
 						await interaction.reply({
 							content: "Chybka se vloudila",
@@ -82,7 +75,6 @@ module.exports = {
 			content: "Posílám košišky",
 			ephemeral: true
 		})
-
 		processCats();
 	}
 }

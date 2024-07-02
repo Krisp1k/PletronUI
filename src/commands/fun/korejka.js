@@ -40,9 +40,7 @@ module.exports = {
 
 		const fetchData = async (data) => {
 			const index = Math.floor(Math.random() * data.results.length);
-
 			const gifUrl = data.results[index].media_formats.gif.url;
-
 			const embed = new EmbedBuilder()
 				.setTitle(`Korejka na přání`)
 				.setColor(0x18e1ee)

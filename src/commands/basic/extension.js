@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('extension')
-		.setDescription('Valyrijské rozšíření do Google Chrome')
+		.setDescription('?')
 	,
 	async run(interaction, client) {
 

@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import client from "../../index.js";
 
 const openai = new OpenAI({
 	organization: process.env.OPENAI_ORG,

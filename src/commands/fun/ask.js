@@ -12,12 +12,10 @@ module.exports = {
 				.setMaxLength(125)
 		),
 	async run(interaction, client) {
-
 		await interaction.deferReply({
 			content: "Dej mi chvilku, přemýšlím...",
 			ephemeral: false,
 		});
-
 		const ask = (await import("../../config/OpenAI_API.mjs")).askResponse;
 		const response = await ask(interaction.options.getString("otazka"), client);
 

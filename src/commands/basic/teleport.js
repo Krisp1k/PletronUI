@@ -51,9 +51,7 @@ module.exports = {
         const SlowServerMinutesPerField = 5
 
         const currentTime = new Date();
-
         const distance = Math.sqrt(Math.pow(xStart - xEnd, 2) + Math.pow(yStart - yEnd, 2))
-
         let flightTime = 0;
 
         if (server === 'fast') {
@@ -63,7 +61,6 @@ module.exports = {
         }
 
         const arrivalTime = new Date(currentTime.getTime() + flightTime * 60000);
-
         const embed = new EmbedBuilder()
             .setTitle(`Doba letu`)
             .setColor(0x18e1ee)

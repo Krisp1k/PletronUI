@@ -1,30 +1,34 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = (client) => {
 	client.handleEvents = async () => {
-		const eventFolders = fs.readdirSync(`./src/events`)
+		const eventFolders = fs.readdirSync(path.join(__dirname, '..', '..', 'events'));
 		for (const folder of eventFolders) {
+			const eventFolderPath = path.join(__dirname, '..', '..', 'events', folder);
 			const eventFiles = fs
-				.readdirSync(`./src/events/${folder}`)
-				.filter((file) => file.endsWith('.js'))
+				.readdirSync(eventFolderPath)
+				.filter((file) => file.endsWith('.js'));
 
 			switch (folder) {
-				case "client":
+				case 'client':
 					for (const file of eventFiles) {
-						const event = require(`../../events/${folder}/${file}`)
+						const eventFilePath = path.join(__dirname, '..', '..', 'events', folder, file);
+						const event = require(eventFilePath);
 						try {
 							if (event.once) {
-								client.once(event.name, (...args) => event.execute(...args, client))
-							}
-							else {
-								client.on(event.name, (...args) => event.execute(...args, client))
+								client.once(event.name, (...args) => event.execute(...args, client));
+							} else {
+								client.on(event.name, (...args) => event.execute(...args, client));
 							}
 						} catch (err) {
-							await client.log("ERROR", `Error při načítání eventu ${file}: ${err.message}`)
+							await client.log('ERROR', `Error při načítání eventu ${file}: ${err.message}`);
 						}
 					}
-				default: break;
+					break;
+				default:
+					break;
 			}
 		}
-	}
-}
+	};
+};

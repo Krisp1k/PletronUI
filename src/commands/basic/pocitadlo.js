@@ -27,18 +27,13 @@ module.exports = {
             breakdownTime.setHours(currentHours);
             breakdownTime.setMinutes(currentMinutes);
 
-            if (currentHours < 8) 
-            {
+            if (currentHours < 8) {
                 breakdownTime.setHours(8);
                 breakdownTime.setMinutes(0);
-            } 
-            else if (currentHours < 16) 
-            {
+            } else if (currentHours < 16) {
                 breakdownTime.setHours(16);
                 breakdownTime.setMinutes(0);
-            } 
-            else 
-            {
+            } else {
                 breakdownTime.setHours(24);
                 breakdownTime.setMinutes(0);
                 breakdownTime.setDate(breakdownTime.getDate() + 1);
@@ -55,7 +50,6 @@ module.exports = {
             }
 
             breakdownTime.setHours(breakdownTime.getHours() + remainingHoursInDay);
-
             let completeBreakdownTime = new Date(breakdownTime);
 
             completeBreakdownTime.setDate(breakdownTime.getDate() + 1);
@@ -65,7 +59,7 @@ module.exports = {
             if (completeBreakdownTime <= breakdownTime) {
                 completeBreakdownTime.setDate(completeBreakdownTime.getDate() + 1);
             }
-
+            
             return {
                 breakdownTime,
                 completeBreakdownTime
@@ -74,7 +68,6 @@ module.exports = {
 
         const currPercentage = interaction.options.getNumber("procenta")
         const casyRozpadu = vypocetCasu(currPercentage);
-
         const options = { 
             day: 'numeric', 
             month: 'numeric', 
