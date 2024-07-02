@@ -40,42 +40,24 @@ client.on('messageCreate', async (msg) => {
 
     msg.content = msg.content.trim();
     const containsTriggerWord = msg.content.toLowerCase().includes(triggerWord.toLowerCase());
-    const isTriggerWord = msg.content.toLowerCase() === triggerWord.toLowerCase();
-
-    // custom andry reply
-    if (msg.channel.id == '1223380151203659856' && msg.author.id == '1158467740672208969') {
-        try {
-            const gptReply = (await import(path.join(__dirname, 'src', 'config', 'OpenAI_API.mjs'))).gptReply;
-            const response = await gptReply(msg.content, true, client);
-            setTimeout(() => {
-                msg.channel.send(response);
-            }, 30000);
-        } catch (error) {
-            client.log('ERROR', error.message, 'GPT API');
-        }
-    }
 
     // REPLIES
-    if (isTriggerWord || (containsTriggerWord && msg.content.length <= 5)) {
+    if (containsTriggerWord && msg.content.length <= 5) {
         // pokud zprava je pouze "lp", tak nebudeme odpovidat pres GPT api
+        const randomReply = await client.randomPletronReply();
         await client.randomPletronReply().then((reply) => {
             msg.channel.send(reply);
         });
-
     } else if (containsTriggerWord) {
         // pokud zprava obsahuje "lp", ale zaroven to neni pouze samotne slovo, tak si hodime kostkou, zda odpovime random reply nebo pres GPT api
-        try {
-            if (Math.random() < 0.25) { // 75% šance na GPT ?
-                await client.randomPletronReply().then((reply) => {
-                    msg.channel.send(reply);
-                });
-            } else {
-                const gptReply = (await import(path.join(__dirname, 'src', 'config', 'OpenAI_API.mjs'))).gptReply;
-                const response = await gptReply(msg.content, false, client);
-                msg.reply(response);
-            }
-        } catch (error) {
-            client.log('ERROR', error.message, 'GPT API');
+        if (Math.random() < 0.25) { // 75% šance na GPT ?
+            await client.randomPletronReply().then((reply) => {
+                msg.channel.send(reply);
+            });
+        } else {
+            await client.gpt.reply(msg.content, client).then((gptReply) => {
+                msg.channel.send(gptReply);
+            });
         }
     }
 
