@@ -44,7 +44,6 @@ client.on('messageCreate', async (msg) => {
     // REPLIES
     if (containsTriggerWord && msg.content.length <= 5) {
         // pokud zprava je pouze "lp", tak nebudeme odpovidat pres GPT api
-        const randomReply = await client.randomPletronReply();
         await client.randomPletronReply().then((reply) => {
             msg.channel.send(reply);
         });
